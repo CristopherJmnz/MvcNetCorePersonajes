@@ -86,7 +86,19 @@ namespace MvcNetCorePersonajes.Repositories
 
         public void UpdatePersonaje(int idPersonaje, string nombre, string imagen)
         {
-            throw new NotImplementedException();
+            string sql = "update personajes set personaje=:nombre,imagen=:imagen where idPersonaje=:id";
+            OracleParameter pamNombre = new OracleParameter(":nombre", nombre);
+            this.com.Parameters.Add(pamNombre);
+            OracleParameter pamImagen = new OracleParameter(":imagen", imagen);
+            this.com.Parameters.Add(pamImagen);
+            OracleParameter pamId=new OracleParameter(":id", idPersonaje);
+            this.com.Parameters.Add(pamId);
+            this.com.CommandText = sql;
+            this.com.CommandType = CommandType.Text;
+            this.cn.Open();
+            this.com.ExecuteNonQuery();
+            this.cn.Close();
+            this.com.Parameters.Clear();
         }
     }
 }

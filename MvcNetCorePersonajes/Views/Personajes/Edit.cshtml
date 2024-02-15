@@ -1,0 +1,11 @@
+﻿@model Personaje
+<h1>Editar personaje</h1>
+<form method="post">
+    <label>Id</label>
+    <input type="number" name="idPersonaje" required class="form-control mb-3" readonly value="@Model.IdPersonaje"/>
+    <label>Nombre</label>
+    <input type="text" name="nombre" required class="form-control mb-3" value="@Model.Nombre"/>
+    <label>Imagen</label>
+    <input type="text" name="imagen" class="form-control  mb-3" value="@Model.Imagen" />
+    <button class="btn btn-primary" type="submit">Editar</button>
+</form>

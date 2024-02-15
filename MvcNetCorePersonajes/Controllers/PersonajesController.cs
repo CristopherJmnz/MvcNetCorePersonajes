@@ -34,5 +34,16 @@ namespace MvcNetCorePersonajes.Controllers
             this.repo.DeletePersonaje(idPersonaje);
             return RedirectToAction("Index");
         }
+        public IActionResult Edit(int idPersonaje) 
+        {
+            Personaje personaje=this.repo.FindPersonajeById(idPersonaje);
+            return View(personaje); 
+        }
+        [HttpPost]
+        public IActionResult Edit(Personaje personaje)
+        {
+            this.repo.UpdatePersonaje(personaje.IdPersonaje, personaje.Nombre, personaje.Imagen);
+            return RedirectToAction("Index");
+        }
     }
 }

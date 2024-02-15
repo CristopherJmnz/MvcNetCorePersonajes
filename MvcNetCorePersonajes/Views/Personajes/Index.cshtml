@@ -7,7 +7,7 @@
             <img src="@pers.Imagen" class="card-img-top" alt="...">
             <div class="card-body" style="flex:1">
                 <h5 class="card-title">@pers.Nombre</h5>
-                <a href="#" class="btn btn-primary">Detalles</a>
+                <a asp-controller="Personajes" asp-action="Edit" asp-route-idPersonaje="@pers.IdPersonaje" class="btn btn-primary">Detalles</a>
                 <a asp-controller="Personajes" asp-action="Delete" asp-route-idPersonaje="@pers.IdPersonaje" class="btn btn-danger">Eliminar</a>
             </div>
         </div>

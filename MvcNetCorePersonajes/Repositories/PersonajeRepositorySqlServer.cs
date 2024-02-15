@@ -10,10 +10,10 @@ namespace MvcNetCorePersonajes.Repositories
 {
     #region PROCEDURES
 
-//    create procedure SP_INSERT_PERSONAJE
-//(@Id int, @nombre nvarchar(50), @imagen nvarchar(50))
-//as
-//	insert into personajes values(@Id, @nombre, @imagen);
+//    create procedure sp_insert_personaje
+//(@id int, @nombre nvarchar(50), @imagen nvarchar(500))
+//    as
+//    	insert into personajes values(@id, @nombre, @imagen);
 //    go
     #endregion
     public class PersonajeRepositorySqlServer : IPersonajesRepository
@@ -23,7 +23,7 @@ namespace MvcNetCorePersonajes.Repositories
         private DataTable tablaPersonajes;
         public PersonajeRepositorySqlServer()
         {
-            string connectionString = @"Data Source=LOCALHOST\SQLEXPRESS;Initial Catalog=HOSPITAL;Persist Security Info=True;User ID=sa;Password=MCSD2023";
+            string connectionString = @"Data Source=LOCALHOST\SQLEXPRESS;Initial Catalog=NetCoreP1;Persist Security Info=True;User ID=sa;Password=''";
             this.cn = new SqlConnection(connectionString);
             this.com = new SqlCommand();
             this.com.Connection = cn;
@@ -94,7 +94,16 @@ namespace MvcNetCorePersonajes.Repositories
 
         public void UpdatePersonaje(int idPersonaje, string nombre, string imagen)
         {
-            throw new NotImplementedException();
+            string sql = "update personajes set personaje=@nombre,imagen=@imagen where idPersonaje=@id";
+            this.com.Parameters.AddWithValue("@nombre", nombre);
+            this.com.Parameters.AddWithValue("@imagen", imagen);
+            this.com.Parameters.AddWithValue("@id", idPersonaje);
+            this.com.CommandText = sql;
+            this.com.CommandType= CommandType.Text;
+            this.cn.Open();
+            this.com.ExecuteNonQuery();
+            this.cn.Close();
+            this.com.Parameters.Clear();
         }
     }
 }
